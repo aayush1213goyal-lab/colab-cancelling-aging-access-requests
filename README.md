@@ -12,7 +12,6 @@ The tool is designed for Identity and Access Management (IAM) operations teams t
 - **Pending Approvals Retrieval**: Fetches all pending access request approvals from the configured tenant.
 - **Age-Based Filtering**: Identifies requests older than a configurable threshold (default: 1 day).
 - **Automated Closure**: Closes identified old requests with a standardized termination message.
-- **Email Notifications**: Sends closure notification emails to requesters when an email address is available.
 - **Configurable**: Uses environment variables for all configuration, making it adaptable to different environments.
 - **Testing Support**: Includes unit tests for key functions to ensure reliability.
 - **Error Handling**: Comprehensive error handling for API failures and missing configurations.
@@ -64,15 +63,9 @@ CLIENT_ID=your-client-id
 CLIENT_SECRET=your-client-secret
 
 # API Endpoints
-API_URL=https://your-tenant.api.identitynow-demo.com/v2025/access-request-approvals/pending
-API_URL1=https://your-tenant.api.identitynow-demo.com/v2025/access-requests/close
+API_URL=https://your-tenant.api.identitynow-demo.com/v2026/access-request-approvals/pending
+API_URL1=https://your-tenant.api.identitynow-demo.com/v2026/access-requests/close
 
-# Email Configuration
-EMAIL_SMTP_SERVER=smtp.example.com
-EMAIL_SMTP_PORT=587
-EMAIL_USERNAME=your-email@example.com
-EMAIL_PASSWORD=your-email-password
-EMAIL_FROM=your-email@example.com
 
 # Processing Configuration
 DAYS_OLD=30  # Number of days after which requests are considered old
@@ -87,7 +80,7 @@ DAYS_OLD=30  # Number of days after which requests are considered old
 - `API_URL1`: Endpoint to close requests
 - `DAYS_OLD`: Threshold in days for closing requests (default: 1)
 
-**Security Note**: Never commit the `.env` file to version control. Add it to `.gitignore`.
+
 
 ## Usage
 
@@ -104,8 +97,7 @@ This will:
 2. Retrieve all pending approvals
 3. Filter requests older than `DAYS_OLD` days
 4. Close each old request
-5. Send email notifications for closed requests when a requester email is available
-6. Print summary statistics
+
 
 ### Sample Output
 
@@ -181,8 +173,6 @@ Edit the `message` field in `close_request_approval()` in `utils.py`.
 ### Modifying Age Threshold
 Adjust `DAYS_OLD` in `.env` or make it dynamic.
 
-### Adding Email Notifications
-This script now supports email notifications for closed requests. Configure SMTP settings in `.env`, and when the approval object contains a requester email address, the system will send a closure notification automatically.
 
 ## Troubleshooting
 
@@ -234,4 +224,4 @@ For issues or questions:
 
 ## Version History
 
-- v1.0: Initial release with basic automation functionality
+- v1.1: Updated release with basic automation functionality
